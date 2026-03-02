@@ -1,9 +1,12 @@
 
+
 public class OOPSBannerApp {
 
     public static void main(String[] args) {
 
-        CharacterPattern O = new CharacterPattern('O', new String[]{
+        Map<Character, String[]> patterns = new HashMap<>();
+
+        patterns.put('O', new String[]{
                 " OOO ",
                 "O   O",
                 "O   O",
@@ -11,7 +14,7 @@ public class OOPSBannerApp {
                 " OOO "
         });
 
-        CharacterPattern P = new CharacterPattern('P', new String[]{
+        patterns.put('P', new String[]{
                 "PPPP ",
                 "P   P",
                 "PPPP ",
@@ -19,7 +22,7 @@ public class OOPSBannerApp {
                 "P    "
         });
 
-        CharacterPattern S = new CharacterPattern('S', new String[]{
+        patterns.put('S', new String[]{
                 " SSSS",
                 "S    ",
                 " SSS ",
@@ -27,35 +30,28 @@ public class OOPSBannerApp {
                 "SSSS "
         });
 
-        CharacterPattern[] word = {O, O, P, S};
-
-        for (int i = 0; i < 5; i++) {
-            for (CharacterPattern c : word) {
-                System.out.print(c.getPattern()[i] + "   ");
-            }
-            System.out.println();
-        }
+        renderBanner("OOPS", patterns);
     }
 
     /**
-     * Inner class to store character and its ASCII pattern
+     * Function to render banner
      */
-    static class CharacterPattern {
+    public static void renderBanner(String word, Map<Character, String[]> patterns) {
 
-        private char character;
-        private String[] pattern;
+        int height = 5;
 
-        public CharacterPattern(char character, String[] pattern) {
-            this.character = character;
-            this.pattern = pattern;
-        }
+        for (int i = 0; i < height; i++) {
 
-        public char getCharacter() {
-            return character;
-        }
+            for (char c : word.toCharArray()) {
 
-        public String[] getPattern() {
-            return pattern;
+                String[] pattern = patterns.get(c);
+
+                if (pattern != null) {
+                    System.out.print(pattern[i] + "   ");
+                }
+            }
+
+            System.out.println();
         }
     }
 }
